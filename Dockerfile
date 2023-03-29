@@ -8,9 +8,9 @@ RUN npm install
 
 COPY . . 
 
-ENV PORT 3000
+ENV PORT 1322
 
-ENV GOOGLE_APPLICATION_CREDENTIAL \app\tts-api-account.json
+ENV GOOGLE_APPLICATION_CREDENTIAL /app/tts-api-account.json
 
 EXPOSE $PORT
 

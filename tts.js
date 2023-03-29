@@ -1,19 +1,24 @@
 // Imports the Google Cloud client library
-const textToSpeech = require('@google-cloud/text-to-speech')
+const { TextToSpeechClient } = require('@google-cloud/text-to-speech')
 
 // Import other required libraries
 const fs = require('fs')
 const util = require('util')
 // Creates a client
-const client = new textToSpeech.TextToSpeechClient()
-async function quickStart(text) {
+const client = new TextToSpeechClient({
+  keyFilename: 'tts-api-account.json',
+})
+async function quickStart(text, speakingRate, speakingVoice) {
   // Construct the request
   const request = {
     input: { text: text },
     // Select the language and SSML voice gender (optional)
-    voice: { languageCode: 'ko-KR', ssmlGender: 'PLAIN' },
+    voice: {
+      languageCode: 'ko-KR',
+      name: speakingVoice,
+    },
     // select the type of audio encoding
-    audioConfig: { audioEncoding: 'MP3' },
+    audioConfig: { audioEncoding: 'MP3', speakingRate: Number(speakingRate) },
   }
 
   // Performs the text-to-speech request

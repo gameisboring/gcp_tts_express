@@ -16,19 +16,24 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('/', (req, res) => {
   res.send(true)
 })
-
+console.log(process.env['GOOGLE_APPLICATION_CREDENTIALS'])
 /* app.get('/tts/:text', (req, res) => {
   console.log(req.params.text)
   res.send(req.params.text)
 }) */
 
-app.get('/tts/:text', async function (req, res) {
-  await quickStart(req.params.text)
+app.get('/:text/:speakingRate/:speakingVoice', async function (req, res) {
+  await quickStart(
+    req.params.text,
+    req.params.speakingRate,
+    req.params.speakingVoice
+  )
     .then(() => {
       res.sendFile(__dirname + '/output.mp3')
     })
     .catch((reason) => {
       console.error('quickStart', reason)
+      res.send(reason)
     })
 })
 

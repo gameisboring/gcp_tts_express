@@ -1,2 +1,5 @@
 /node_modules
 /tts-api-account.json
+/build.sh
+/run.sh
+/stop.sh
